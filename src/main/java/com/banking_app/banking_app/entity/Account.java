@@ -19,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity
+@Entity //JPA
 @Table(name="accounts")
 public class Account {
     
