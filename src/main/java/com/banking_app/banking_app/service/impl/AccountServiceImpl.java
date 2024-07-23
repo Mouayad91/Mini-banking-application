@@ -56,6 +56,25 @@ orElseThrow(()->new RuntimeException("Account is not registered"));
 return AccountMapper.mapToAccountDto(account);
 
 }
+
+
+@Override
+public AccountDto deposite(Long id, double ammount) {
+
+    Account account = accountRepository.
+    findById(id).
+    orElseThrow(()->new RuntimeException("Account is not registered"));
+    
+
+
+    double total = account.getBalance() + ammount;
+
+    account.setBalance(total);
+
+   Account savedAccount = accountRepository.save(account);
+
+   return AccountMapper.mapToAccountDto(savedAccount);
+}
     
 
 

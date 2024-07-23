@@ -9,4 +9,6 @@ AccountDto createAccount(AccountDto accountDto);
 
 AccountDto getAccountByID(Long id);
 
+AccountDto deposite(Long id, double ammount);
+
 }
