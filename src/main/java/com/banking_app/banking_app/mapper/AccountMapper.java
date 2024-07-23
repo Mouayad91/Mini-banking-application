@@ -5,7 +5,7 @@ import com.banking_app.banking_app.entity.Account;
 
 public class AccountMapper {
     
-//converts objects from one type to another
+//converts account dto into JAP entity
 public static Account mapToAccount(AccountDto accountDto){
    
    Account account = new Account( accountDto.getId(),
@@ -15,6 +15,20 @@ public static Account mapToAccount(AccountDto accountDto){
     return account;
 
     
+}
+
+// convert account JPA entity into account dto
+public static AccountDto mapToAccountDto(Account account){
+
+    AccountDto accountDto = new AccountDto(
+    account.getId(),
+    account.getAccountOwnerName(),
+    account.getBalance()
+
+    );
+
+
+    return accountDto;
 }
 
 
