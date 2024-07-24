@@ -10,11 +10,22 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-@ControllerAdvice
+/**
+ * Global exception handler for handling exceptions across the whole application.
+ */
+
+ 
+@ControllerAdvice // Allows for global exception handling in the application
 public class GlobalExceptionHandler {
     
-//hander AccountExceptions
-@ExceptionHandler(AccountException.class)
+    /**
+     * Handles AccountExceptions.
+     * @param exceptions - the account exception
+     * @param webRequest - the web request during which the exception occurred
+     * @return ResponseEntity containing error details and HTTP status
+     */
+
+@ExceptionHandler(AccountException.class) // Specifies the type of exception to handle
 public ResponseEntity<ErrorsDetails> handleAccountException(
     AccountExceptions exceptions, WebRequest webRequest){
       
@@ -31,9 +42,14 @@ public ResponseEntity<ErrorsDetails> handleAccountException(
 
 }
 
-// handle generic exception
+    /**
+     * Handles generic exceptions.
+     * @param exception - the exception
+     * @param webRequest - the web request during which the exception occurred
+     * @return ResponseEntity containing error details and HTTP status
+     */
 
-@ExceptionHandler(Exception.class)
+@ExceptionHandler(Exception.class) // Specifies the type of exception to handle
 public ResponseEntity<ErrorsDetails> handleGenericException(Exception exception,WebRequest webRequest){
 
     ErrorsDetails errorsDetails = new ErrorsDetails(

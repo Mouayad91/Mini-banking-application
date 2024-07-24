@@ -11,20 +11,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter // Lombok annotation to generate getter methods
+@Setter // Lombok annotation to generate setter methods
+@NoArgsConstructor // Lombok annotation to generate no-args constructor
+@AllArgsConstructor // Lombok annotation to generate all-args constructor
 
-@Entity //JPA
-@Table(name="accounts")
+@Entity // JPA annotation to mark this class as an entity
+@Table(name="accounts") // Specifies the table name in the database
 public class Account {
     
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id // Marks this field as the primary key
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // Specifies the primary key generation strategy
     private Long id;
 
-    @Column(name="accoount_owner_name")
+    @Column(name="accoount_owner_name") // Maps this field to the specified column name in the table
     private String accountOwnerName;
 
     @Column(name="balance")
