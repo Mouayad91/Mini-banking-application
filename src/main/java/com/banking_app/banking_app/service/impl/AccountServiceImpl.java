@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.banking_app.banking_app.dto.AccountDto;
 import com.banking_app.banking_app.entity.Account;
+import com.banking_app.banking_app.exceptions.AccountExceptions;
 import com.banking_app.banking_app.mapper.AccountMapper;
 import com.banking_app.banking_app.repository.AccountRepository;
 import com.banking_app.banking_app.service.AccountService;
@@ -54,7 +55,7 @@ public AccountDto getAccountByID(Long id) {
 
 Account account = accountRepository.
 findById(id).
-orElseThrow(()->new RuntimeException("Account is not registered"));
+orElseThrow(()->new AccountExceptions("Account is not registered"));
 
 return AccountMapper.mapToAccountDto(account);
 
@@ -66,7 +67,7 @@ public AccountDto deposite(Long id, double amount) {
 
     Account account = accountRepository.
     findById(id).
-    orElseThrow(()->new RuntimeException("Account is not registered"));
+    orElseThrow(()->new AccountExceptions("Account is not registered"));
     
 
 
@@ -86,7 +87,7 @@ public AccountDto withDraw(Long id, double amount) {
 
     Account account = accountRepository.
     findById(id).
-    orElseThrow(()->new RuntimeException("Account is not registered"));
+    orElseThrow(()->new AccountExceptions("Account is not registered"));
 
     if(account.getBalance() < amount){
 
@@ -123,7 +124,7 @@ public void deleteAccount(Long id) {
 
     Account account = accountRepository.
     findById(id).
-    orElseThrow(()->new RuntimeException("Account is not registered"));
+    orElseThrow(()->new AccountExceptions("Account is not registered"));
 
     accountRepository.deleteById(id);
 
