@@ -8,9 +8,10 @@ public class AccountMapper {
 //converts account dto into JAP entity
 public static Account mapToAccount(AccountDto accountDto){
    
-   Account account = new Account( accountDto.getId(),
-   accountDto.getAccountOwnerName(),
-   accountDto.getBalance());
+   Account account = new Account( 
+    accountDto.id(),
+   accountDto.accountOwnerName(),
+   accountDto.balance());
   
     return account;
 

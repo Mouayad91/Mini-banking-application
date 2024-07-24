@@ -1,6 +1,9 @@
 package com.banking_app.banking_app.service.impl;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.banking_app.banking_app.dto.AccountDto;
@@ -59,7 +62,7 @@ return AccountMapper.mapToAccountDto(account);
 
 
 @Override
-public AccountDto deposite(Long id, double ammount) {
+public AccountDto deposite(Long id, double amount) {
 
     Account account = accountRepository.
     findById(id).
@@ -67,7 +70,7 @@ public AccountDto deposite(Long id, double ammount) {
     
 
 
-    double total = account.getBalance() + ammount;
+    double total = account.getBalance() + amount;
 
     account.setBalance(total);
 
@@ -75,8 +78,59 @@ public AccountDto deposite(Long id, double ammount) {
 
    return AccountMapper.mapToAccountDto(savedAccount);
 }
+
+
+@Override
+public AccountDto withDraw(Long id, double amount) {
     
 
+    Account account = accountRepository.
+    findById(id).
+    orElseThrow(()->new RuntimeException("Account is not registered"));
+
+    if(account.getBalance() < amount){
+
+        throw new RuntimeException("Something went wrong");
+    }
+
+    double total = account.getBalance() - amount;
+
+    account.setBalance(total);
+    Account savedAccount = accountRepository.save(account);
+
+    return AccountMapper.mapToAccountDto(savedAccount);
+
+}
+
+
+@Override
+public List<AccountDto> getAllAccounts() {
+   
+List<Account> accounts = accountRepository.findAll();
+
+return accounts.stream().
+map((account)-> AccountMapper.
+mapToAccountDto(account)).
+collect(Collectors.toList());
+
+
+}
+
+
+@Override
+public void deleteAccount(Long id) {
+
+
+    Account account = accountRepository.
+    findById(id).
+    orElseThrow(()->new RuntimeException("Account is not registered"));
+
+    accountRepository.deleteById(id);
+
+
+}
+  
+    
 
 
     
